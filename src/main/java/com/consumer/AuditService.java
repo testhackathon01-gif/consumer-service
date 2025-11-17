@@ -16,6 +16,11 @@ public class AuditService {
 
         // Call method from PricingUtility (JAR)
         double currentTaxRate = pricingUtility.getTaxRate();
+        if(currentTaxRate > 1){
+            System.out.println("-> Value is as expected ");
+        }else{
+            System.out.println("-> value is not expected ");
+        }
         System.out.println("-> Audit Check: Current tax rate from JAR is " + (currentTaxRate * 100) + "%.");
 
         // Call method from InvoiceGenerator (JAR)
@@ -24,5 +29,7 @@ public class AuditService {
         // NOTE: The InvoiceGenerator's tax calculation is flawed due to the hardcoded
         // 5% rate in PricingUtility, which might not be the desired rate for invoicing.
         System.out.println("-> Audit Check: Total for subtotal $" + subtotal + " with tax is $" + totalWithTax);
+        double totalCalculateValue = pricingUtility.calculateDiscount(2, 3);
+        System.out.println("-> Audit Check: Total for value $" + totalCalculateValue);
     }
 }
